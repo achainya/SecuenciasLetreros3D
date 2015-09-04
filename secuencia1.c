@@ -2,7 +2,7 @@
 
 #fuses XT, NOWDT, NOPROTECT, NOLVP   // Definimos los FUSES para el uC PIC16F877
 
-#use delay(clock=4000000)   // Frecuencia de reloj (20MHz)
+#use delay(clock=4000000)   // Frecuencia de reloj (4MHz)
 
 // Constantes y definiciones ////////////////////////////////////////////////////////////
 
@@ -99,7 +99,7 @@ void main() {
 
    do {
       for(i = 1; i <= 8; i++) {
-         EnciendeLetra(9, i);
+         EnciendeLetra(1, i);
          delay_ms(500);
       }
    } while(TRUE);
