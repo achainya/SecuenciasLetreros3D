@@ -8,17 +8,17 @@
 
 char IDPuertoLetra(char NROLETRA) {
    switch (NROLETRA) {
-      case  1:  return PIN_B0 + 0;  break;
-      case  2:  return PIN_B0 + 3;  break;
-      case  3:  return PIN_B0 + 6;  break;
-      case  4:  return PIN_B0 + 9;  break;
-      case  5:  return PIN_B0 + 12; break;
-      case  6:  return PIN_B0 + 15; break;
-      case  7:  return PIN_B0 + 18; break;
-      case  8:  return PIN_B0 + 21; break;
-      case  9:  return PIN_A0 + 0;  break;
-      case 10:  return PIN_A0 + 3;  break;
-      case 11:  return PIN_B0 + 24; break;
+      case  1:  return PIN_B0; break;
+      case  2:  return PIN_B3; break;
+      case  3:  return PIN_B6; break;
+      case  4:  return PIN_C1; break;
+      case  5:  return PIN_C4; break;
+      case  6:  return PIN_C7; break;
+      case  7:  return PIN_D2; break;
+      case  8:  return PIN_D5; break;
+      case  9:  return PIN_A0; break;
+      case 10:  return PIN_A3; break;
+      case 11:  return PIN_E0; break;
    }
 }
 
@@ -99,7 +99,7 @@ void main() {
 
    do {
       for(i = 1; i <= 8; i++) {
-         EnciendeLetra(11, i);
+         EnciendeLetra(9, i);
          delay_ms(500);
       }
    } while(TRUE);
