@@ -1,5 +1,4 @@
 #include "16F877A.h"
-#include <stdlib.h>
 
 #fuses XT, NOWDT, NOPROTECT, NOLVP   // Definimos los FUSES para el uC PIC16F877
 
@@ -7,13 +6,20 @@
 
 // Constantes y definiciones ////////////////////////////////////////////////////////////
 
-#define  PORTA  40
-#define  PORTB  48
-
-int IDPuertoLetra(char NroLetra) {
-   if (NroLetra == 9)
-      return PORTA;
-   return PORTB + 3 * NroLetra;
+char IDPuertoLetra(char NROLETRA) {
+   switch (NROLETRA) {
+      case  1:  return PIN_B0 + 0;  break;
+      case  2:  return PIN_B0 + 3;  break;
+      case  3:  return PIN_B0 + 6;  break;
+      case  4:  return PIN_B0 + 9;  break;
+      case  5:  return PIN_B0 + 12; break;
+      case  6:  return PIN_B0 + 15; break;
+      case  7:  return PIN_B0 + 18; break;
+      case  8:  return PIN_B0 + 21; break;
+      case  9:  return PIN_A0 + 0;  break;
+      case 10:  return PIN_A0 + 3;  break;
+      case 11:  return PIN_B0 + 24; break;
+   }
 }
 
 void Color1(char PUERTO) { // Apagado
@@ -64,35 +70,36 @@ void Color8(char PUERTO) { // Blanco
    output_high(PUERTO + 2);
 }
 
-
-void EnciendeLetra(char LETRA, char COLOR) {
-   int NroLetra;
-   NroLetra = LETRA - 1;
-   
-   switch (COLOR) {
-      case 1: Color1(IDPuertoLetra(NroLetra)); break;
-      case 2: Color2(IDPuertoLetra(NroLetra)); break;
-      case 3: Color3(IDPuertoLetra(NroLetra)); break;
-      case 4: Color4(IDPuertoLetra(NroLetra)); break;
-      case 5: Color5(IDPuertoLetra(NroLetra)); break;
-      case 6: Color6(IDPuertoLetra(NroLetra)); break;
-      case 7: Color7(IDPuertoLetra(NroLetra)); break;
-      case 8: Color8(IDPuertoLetra(NroLetra)); break;
+void EnciendeLetra(char NROLETRA, char NROCOLOR) {
+   switch (NROCOLOR) {
+      case 1: Color1(IDPuertoLetra(NROLETRA)); break;
+      case 2: Color2(IDPuertoLetra(NROLETRA)); break;
+      case 3: Color3(IDPuertoLetra(NROLETRA)); break;
+      case 4: Color4(IDPuertoLetra(NROLETRA)); break;
+      case 5: Color5(IDPuertoLetra(NROLETRA)); break;
+      case 6: Color6(IDPuertoLetra(NROLETRA)); break;
+      case 7: Color7(IDPuertoLetra(NROLETRA)); break;
+      case 8: Color8(IDPuertoLetra(NROLETRA)); break;
    }
 }
 
 void main() {
    char i;
-   set_tris_a(0b00000000); // Lineas RA0-RA3 salidas y RA4 entrada
-   set_tris_b(0b00000000); // Puerto RB0-RB7 sensores CNY1-CNY8
-   set_tris_c(0b00000000); // Puerto RC0-CNY9, RC1-EN2, RC2-EN1, RC3-RC5-SW's, 
-                           // RC6-TX y RC7-RX
-   set_tris_d(0b00000000); // RD0-RD2, RD4-RD7 conectado al LCD y RD3-SW OK
-   set_tris_e(0b11111000); // RE0-RE3 diodos led
+   set_tris_a(0b00000000); // Puerto A salida
+   set_tris_b(0b00000000); // Puerto B salida 
+   set_tris_c(0b00000000); // Puerto C salida
+   set_tris_d(0b00000000); // Puerto D salida
+   set_tris_e(0b11111000); // Puerto E salida
+   
+   output_a(0x00);
+   output_b(0x00);
+   output_c(0x00);
+   output_d(0x00);
+   output_e(0x00);
 
    do {
       for(i = 1; i <= 8; i++) {
-         EnciendeLetra(10, i);
+         EnciendeLetra(11, i);
          delay_ms(500);
       }
    } while(TRUE);
