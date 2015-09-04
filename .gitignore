@@ -17,6 +17,19 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#Archivos de compilacion
+*.bak
+*.cof
+*.hex
+*.lst
+*.err
+*.esym
+*.sta
+*.sym
+*.tre
+*.pwi
+*.dbk
+
 # =========================
 # Operating System Files
 # =========================
